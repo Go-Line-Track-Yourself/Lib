@@ -1,3 +1,6 @@
+#ifndef Ramping
+#define Ramping
+
 class Ramping{
     public:
     int ChangePct=1;      //the amout of Pct change per loop
@@ -19,3 +22,4 @@ class Ramping{
 
     void TaskRun();
 };
+#endif
