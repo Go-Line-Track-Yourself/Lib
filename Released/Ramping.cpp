@@ -1,4 +1,5 @@
 #include "Ramping.h"
+   
 void Ramping::TaskRun(){
     if(RequestedPct>Pct){
         Pct=Pct+ChangePct;

@@ -11,7 +11,7 @@ class Ramping{
     int MinDownPct=0;       //Used as moving down StillSpeed
     int MaxPct=100;         //the max pct value
 
-   Ramping(int CP,int CM,int MaxP=100,int MinDP=0,int MinUP=0){
+    Ramping(int CP,int CM,int MaxP=100,int MinDP=0,int MinUP=0){
         //ChangePct,ChangeMsec,MaxPct
         ChangePct=CP;
         ChangeMsec=CM;
@@ -19,7 +19,6 @@ class Ramping{
         MinUpPct=MinUP;
         MinDownPct=MinDP;
     }
-
     void TaskRun();
 };
 #endif
