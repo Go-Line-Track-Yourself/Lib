@@ -1,21 +1,18 @@
-#ifndef Timer
-#define Timer
+//#ifndef Timer
+//#define Timer
 
 class Timer{
     public:
     int StartTime=0;
-    int TargetTime=3000;
-
     bool Started=false;
+    int TargetTime=0;
 
-    Timer(int Tar){
-        TargetTime=Tar;
-    }
+    Timer(int Tar);
 
     int RelTime=Brain.timer(vex::timeUnits::msec)-StartTime;//counts up
-    int Remaning=TargetTime-RelTime;//counts down
+    int Remaining=TargetTime-RelTime;//counts down
     bool Hit();
     void Start(double T);
 
 };
-#endif
+//#endif

@@ -1,7 +1,9 @@
 #include "Timer.h"
-
+    Timer::Timer(int Tar){
+        TargetTimer=Tar;
+    }
     bool Timer::Hit(){
-        if(Remaning<0)      return true;
+        if(Remaining<0)      return true;
         else                return false;
     }
     void Timer::Start(double T){

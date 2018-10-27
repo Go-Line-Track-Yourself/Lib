@@ -1,5 +1,5 @@
-#ifndef Ramping
-#define Ramping
+//#ifndef Ramping
+//#define Ramping
 
 class Ramping{
     public:
@@ -21,4 +21,4 @@ class Ramping{
     }
     void TaskRun();
 };
-#endif
+//#endif
