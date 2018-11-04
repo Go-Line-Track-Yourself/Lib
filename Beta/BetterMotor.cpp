@@ -1,23 +1,8 @@
 #ifndef MotorSystem_CPP
 #define MotorSystem_CPP
 
-#include <vector>
-
-class MotorSystem{
-    public:
-    //    enum class ControlTypes{NONE,BTNS,TOGl,JOY};
-    std::vector<vex::motor> Motors;
-    int NumMotors=0; 
-    bool IsSpining=false;
-    int MovePct=100;//Defalt Pct for moving
-    int SSPct=0;//Still Speed Pct
-    int Tal=5;//get to talerance
-
-    int MinPos, MaxPos;
-    bool HasMinPos=false, HasMaxPos=false;
-    int PctAtMinPos=0;//Min Pos Still Speed
-    int PctAtMaxPos=0;//Max Pos Still Speee
-    //SetUp
+#include "BetterMotor.h"
+using namespace MotorSystem;
     MotorSystem(int Num){
         NumMotors=Num;
         //Motors.reserve(Num);//reserves the memory for Num motors to be added
@@ -46,7 +31,7 @@ class MotorSystem{
         return int(Motors[Index].rotation(Units));
     }
     //End Sensors
-    //Motor Comands
+    //Motor
     void Stop(){
         for( int i = 0; i < NumMotors; i++){
             Motors[i].stop();
@@ -88,5 +73,4 @@ class MotorSystem{
 
        }
        */
-};
 #endif
