@@ -1,18 +1,92 @@
-int PuncLastRotation=0;
-bool PuncherMotorIsSpinningUpDaterEnabled=true;
-bool PMIS=false;//PuncherMotorIsSpinning renamed becuse vex v4 api made me
-bool PuncherMotorIsSpinning(){
-    if(abs(PuncherMotor.rotation(vex::rotationUnits::deg)-10)>PuncLastRotation)   return false;
-    else                                        return true;
-    // PuncLastRotation=PuncherMotor.rotation(vex::rotationUnits::raw);
-}
+#ifndef MotorSystem_CPP
+#define MotorSystem_CPP
 
-int PuncherMotorIsSpinningUpDater(){
-    PuncherMotorIsSpinningUpDaterEnabled=true;
-    while(PuncherMotorIsSpinningUpDaterEnabled){
-        PuncLastRotation=PuncherMotor.rotation(vex::rotationUnits::deg);
-        PMIS=PuncherMotorIsSpinning();
-        vex::task::sleep(1);
+#include <vector>
+
+class MotorSystem{
+    public:
+    //    enum class ControlTypes{NONE,BTNS,TOGl,JOY};
+    std::vector<vex::motor> Motors;
+    int NumMotors=0; 
+    bool IsSpining=false;
+    int MovePct=100;//Defalt Pct for moving
+    int SSPct=0;//Still Speed Pct
+    int Tal=5;//get to talerance
+
+    int MinPos, MaxPos;
+    bool HasMinPos=false, HasMaxPos=false;
+    int PctAtMinPos=0;//Min Pos Still Speed
+    int PctAtMaxPos=0;//Max Pos Still Speee
+    //SetUp
+    MotorSystem(int Num){
+        NumMotors=Num;
+        //Motors.reserve(Num);//reserves the memory for Num motors to be added
     }
-    return 1;
-}
+    void AddMotor(vex::motor & m){
+        Motors.at(NumMotors)=m;
+        NumMotors++;
+    }
+    void MinPosLimit(int Pos){
+        HasMinPos=true;
+        MinPos=Pos;
+    }
+    void MaxPosLimit(int Pos){
+        HasMaxPos=true;
+        MaxPos=Pos;
+    }
+    void PosLimit(int Min,int Max,int MinPct=0,int MaxPct=0){
+        MinPosLimit(Min);
+        MaxPosLimit(Max);
+        PctAtMinPos=MinPct;
+        PctAtMaxPos=MaxPct;
+    }
+    //End SetUp
+    //Sensors
+    int Position(vex::rotationUnits Units,int Index=1){
+        return int(Motors[Index].rotation(Units));
+    }
+    //End Sensors
+    //Motor Comands
+    void Stop(){
+        for( int i = 0; i < NumMotors; i++){
+            Motors[i].stop();
+        }
+        IsSpining=false;
+    }
+    void SM(int Pct){
+        if(Pct==0)  Stop();
+        else{
+            IsSpining=true;
+            for( int i = 0; i < NumMotors; i++){
+                Motors[i].spin(vex::directionType::fwd,Pct,vex::velocityUnits::pct);
+            }
+        }
+    }
+    void SMS(int Pct){
+        if(HasMinPos && Position(vex::rotationUnits::deg) <= MinPos && Pct<PctAtMinPos){
+            SM(PctAtMinPos);
+        }
+        if(HasMaxPos && Position(vex::rotationUnits::deg)>=MaxPos && Pct>PctAtMaxPos){
+            SM(PctAtMaxPos);
+        }
+        else{
+            SM(Pct);
+        }
+    }
+    //End Motor Comands
+    /*    void 
+    void GetTo(int TargetPos,bool WaitFor,int Pct=MovePct){
+        IsSpining=true;
+        for(int i=0;i<NumMotors; i++){
+            Motors[i].startRotateTo(TargetPos,vex::rotationUnits::deg,Pct,vex::velocityUnits::pct);
+        }
+        if(Wait){
+            while(ABS(TargetPos-Position())>Tal){}
+            IsSpining=false;
+       }
+       else{
+
+       }
+       */
+};
+#endif
