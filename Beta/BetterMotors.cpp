@@ -4,7 +4,7 @@
 class MotorSystem{
     public:
     //    enum class ControlTypes{NONE,BTNS,TOGl,JOY};
-    enum class MoveType{Stop,Spin,GetTo,PID,Ramp}
+    enum class MoveType{Stop,Spin,GetTo,PID,Ramp};
     std::vector<vex::motor> Motors;
     int NumMotors=0;
     bool IsSpining=false;

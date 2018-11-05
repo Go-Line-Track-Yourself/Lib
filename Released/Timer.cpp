@@ -11,11 +11,11 @@ class Timer{
     int RelTime=Brain.timer(vex::timeUnits::msec)-StartTime;//counts up
     int Remaning=TargetTime-RelTime;//counts down
     bool Hit(){
-        return (Remaing<0);
+        return (Remaning<0);
     }
     void Start(double T){
-        Started=true;
-        StartTime=T+1;
+        
+        StartTime=T;
     }
 };
 #endif
