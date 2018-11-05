@@ -1,4 +1,4 @@
-double ABS(double Var){
+double ABS(double Var){//use "#include <cmath>" and "std::abs()"instead
     if(Var<0)  Var=Var*(-1);
     return Var;
 }

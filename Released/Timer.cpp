@@ -1,14 +1,22 @@
-#include "Timer.h"
-    Timer::Timer(int Tar){
-        TargetTimer=Tar;
+#ifndef Timer_cpp
+#define Timer_cpp
+class Timer{
+    public:
+    int StartTime=0;
+    int TargetTime=0;
+
+    Timer(int Tar){
+        TargetTime=Tar;
     }
-    bool Timer::Hit(){
-        if(Remaining<0)      return true;
-        else                return false;
+    int RelTime=Brain.timer(vex::timeUnits::msec)-StartTime;//counts up
+    int Remaning=TargetTime-RelTime;//counts down
+    bool Hit(){
+        return (Remaing<0);
     }
-    void Timer::Start(double T){
+    void Start(double T){
         Started=true;
         StartTime=T+1;
     }
-
 };
+#endif
+Timer lift(10000);

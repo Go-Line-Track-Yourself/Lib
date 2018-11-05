@@ -4,7 +4,6 @@
 class MotorSystem{
     public:
     //    enum class ControlTypes{NONE,BTNS,TOGl,JOY};
-    enum class MoveType{Stop,Spin,GetTo,PID,Ramp}
     std::vector<vex::motor> Motors;
     int NumMotors=0;
     bool IsSpining=false;
@@ -65,7 +64,7 @@ class MotorSystem{
                 Motors[i].spin(vex::directionType::fwd,Pct,vex::velocityUnits::pct);
             }
         }
-    } 
+    }
     void SMS(int Pct){
         if(HasMinPos && Position(vex::rotationUnits::deg) <= MinPos && Pct<PctAtMinPos){
             SM(PctAtMinPos);
@@ -77,14 +76,6 @@ class MotorSystem{
             SM(Pct);
         }
     }
-    void Execute(){
-
-    }
-
-
-
-
-
     //End Motor Comands
     /* 
     void GetTo(int TargetPos,bool WaitFor,int Pct=MovePct){

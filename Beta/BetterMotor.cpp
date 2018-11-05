@@ -1,25 +1,22 @@
-#ifndef MotorSystem_CPP
-#define MotorSystem_CPP
-
 #include "BetterMotor.h"
-using namespace MotorSystem;
-    MotorSystem(int Num){
+
+    MotorSystem::MotorSystem(int Num){
         NumMotors=Num;
         //Motors.reserve(Num);//reserves the memory for Num motors to be added
     }
-    void AddMotor(vex::motor & m){
+    void MotorSystem::AddMotor(vex::motor & m){
         Motors.at(NumMotors)=m;
         NumMotors++;
     }
-    void MinPosLimit(int Pos){
+    void MotorSystem::MinPosLimit(int Pos){
         HasMinPos=true;
         MinPos=Pos;
     }
-    void MaxPosLimit(int Pos){
+    void MotorSystem::MaxPosLimit(int Pos){
         HasMaxPos=true;
         MaxPos=Pos;
     }
-    void PosLimit(int Min,int Max,int MinPct=0,int MaxPct=0){
+    void MotorSystem::PosLimit(int Min,int Max,int MinPct=0,int MaxPct=0){
         MinPosLimit(Min);
         MaxPosLimit(Max);
         PctAtMinPos=MinPct;
@@ -27,18 +24,18 @@ using namespace MotorSystem;
     }
     //End SetUp
     //Sensors
-    int Position(vex::rotationUnits Units,int Index=1){
+    int MotorSystem::Position(vex::rotationUnits Units,int Index=1){
         return int(Motors[Index].rotation(Units));
     }
     //End Sensors
     //Motor
-    void Stop(){
+    void MotorSystem::Stop(){
         for( int i = 0; i < NumMotors; i++){
             Motors[i].stop();
         }
         IsSpining=false;
     }
-    void SM(int Pct){
+    void MotorSystem::SM(int Pct){
         if(Pct==0)  Stop();
         else{
             IsSpining=true;
@@ -47,7 +44,7 @@ using namespace MotorSystem;
             }
         }
     }
-    void SMS(int Pct){
+    void MotorSystem::SMS(int Pct){
         if(HasMinPos && Position(vex::rotationUnits::deg) <= MinPos && Pct<PctAtMinPos){
             SM(PctAtMinPos);
         }
@@ -73,4 +70,3 @@ using namespace MotorSystem;
 
        }
        */
-#endif

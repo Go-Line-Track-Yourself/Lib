@@ -1,7 +1,6 @@
-#ifndef BetterMotors_h
-#define BetterMotors_h
-
-//#include <vector>
+#include <vector>
+#ifndef BetterMotor_h
+#define BetterMotor_h
 
 class MotorSystem{
     public:
