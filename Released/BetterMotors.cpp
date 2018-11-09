@@ -51,20 +51,25 @@ class MotorSystem{
     //End Sensors
     //Motor Comands
     void Stop(){
+        Brain.Screen.print("no");
         for( int i = 0; i < NumMotors; i++){
             Motors[i].stop();
         }
         IsSpining=false;
-    }
+    }M
     void SM(int Pct){
+        Brain.Screen.print("spin");
         if(Pct==0)  Stop();
         else{
             IsSpining=true;
+            Brain.Screen.print("spin");
             for( int i = 0; i < NumMotors; i++){
-                Motors[i].spin(vex::directionType::fwd,Pct,vex::velocityUnits::pct);
+                Brain.Screen.print("spin");
+                Motors.at(i).spin(vex::directionType::fwd,Pct,vex::velocityUnits::pct);
             }
         }
     }
+    
     void SMS(int Pct){
         if(HasMinPos && Position(vex::rotationUnits::deg) <= MinPos && Pct<PctAtMinPos){
             SM(PctAtMinPos);

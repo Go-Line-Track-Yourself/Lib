@@ -1,10 +1,11 @@
 #ifndef MotorSystem_CPP
 #define MotorSystem_CPP
 #include <vector>
+enum class MoveType{STOPED,GETTO,PID,TIME};
 class MotorSystem{
     public:
     //    enum class ControlTypes{NONE,BTNS,TOGl,JOY};
-    enum class MoveType{Stop,Spin,GetTo,PID,Ramp};
+    MoveType System
     std::vector<vex::motor> Motors;
     int NumMotors=0;
     bool IsSpining=false;
@@ -15,13 +16,16 @@ class MotorSystem{
     int MinPos, MaxPos;
     bool HasMinPos=false, HasMaxPos=false;
     int PctAtMinPos=0;//Min Pos Still Speed
-    int PctAtMaxPos=0;//Max Pos Still Speee
+    int PctAtMaxPos=0;//Max Pos Still Speed
+
+    int TargetPos;
     //SetUp
     MotorSystem(int Num,vex::motor * Mots){
         NumMotors=Num;
         for(int i=0;i<Num;i++){
             Motors.at(i)=Mots[i];
         }
+        System=MoveType::STOPED;
         //Motors.reserve(Num);//reserves the memory for Num motors to be added
     }
     void AddMotor(vex::motor & m){
@@ -80,7 +84,26 @@ class MotorSystem{
     void Execute(){
 
     }
+    /*
+    void GetTO(int Pos, bool runConcurrently=true, int movePower=127, int endPower=128, int timeout=10) {	//TODO: auto-determine endPower as in moveForDuration
+	TargetPos = Pos;
+	group->forward = group->targetPos > getPosition(group);
+	group->movePower = abs(movePower) * (group->forward ? 1 : -1);
+	group->endPower = (endPower>127 ? calcStillSpeed(group, group->forward) : endPower);
+	group->maneuverTimeout = timeout;
+	group->maneuverTimer = resetTimer();
+	group->moving = MANEUVER;
 
+	setPower(group, group->movePower);
+
+	if (!runConcurrently) {
+		while (group->moving == MANEUVER) {
+			executeAutomovement(group);
+			EndTimeSlice();
+		}
+	}
+}
+    */
 
 
 

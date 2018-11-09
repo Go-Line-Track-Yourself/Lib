@@ -19,4 +19,3 @@ class Timer{
     }
 };
 #endif
-Timer lift(10000);
