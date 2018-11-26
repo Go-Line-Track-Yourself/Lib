@@ -1,6 +1,5 @@
 #ifndef Ramping_cpp
 #define Ramping_cpp
-
 class Ramping{
     public:
     int ChangePct=1;      //the amout of Pct change per loop

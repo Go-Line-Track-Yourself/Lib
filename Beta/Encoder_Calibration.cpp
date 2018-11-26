@@ -24,4 +24,5 @@ int JawCal(){
     return 1;                           //return 1 or true
     }
 }
+int jawcaltime=GlobTime
 #endif
