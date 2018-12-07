@@ -5,8 +5,9 @@ double ABS(double Var){//use "#include <cmath>" and "std::abs()"instead
     return Var;
 }
 int SGN(double Var){
-    if(Var>0)   Var=1;
-    else        Var=-1;
+    if(Var>0)       Var=1;
+    else if(Var<0)  Var=-1;
+    else            Var=0;
     return Var;
 }
 #endif
