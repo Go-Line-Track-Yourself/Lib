@@ -6,6 +6,6 @@ QuadRamp::QuadRamp(int dist, int begin, int max, int end) {
    c = begin;
 }
 
-float QuadRamp::eval(int input) {
+double QuadRamp::eval(int input) {
   return a*input*input + b*input + c;
 }

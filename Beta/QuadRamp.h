@@ -2,9 +2,9 @@
 #define QuadRamp
 class QuadRamp{
   public:
-    float eval(float input);
+    double eval(double input);
   private:
-    float a, b, c;
-    QuadRamp(float dist, float begin, float max, float end)
+    double a, b, c;
+    QuadRamp(double dist, double begin, double max, double end)
 };
 #endif
