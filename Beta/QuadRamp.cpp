@@ -1,9 +1,9 @@
 #include "QuadRamp.h"
 
 QuadRamp::QuadRamp(int dist, int begin, int max, int end) {
-   a = ((end + begin - 2*max) - 2*sqrt((end-max) * (initial-max))) / (dist * dist);
-   b = ((end-initial)/dist - a*dist) * SGN(dist);
-   c = start;
+   a = ((end + begin - 2*max) - 2*sqrt((end-max) * (begin-max))) / (dist * dist);
+   b = ((end-begin)/dist - a*dist) * SGN(dist);
+   c = begin;
 }
 
 float QuadRamp::eval(int input) {
