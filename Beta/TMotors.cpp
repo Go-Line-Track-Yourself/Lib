@@ -8,7 +8,7 @@ void TMotors::Stop(){
     }
 }
 void TMotors::SMS(int v){
-    VSetting=v;
+    VSet=v;
     if(v==0)    Stop();
     else{
         for(int i=0; i < NumberOfMotors; ++i){
@@ -28,4 +28,14 @@ double TMotors::Rotation(){
 }
 void TMotors::SetStop(vex::brakeType sunits){
     SUnits=sunits;
+}
+vex::brakeType TMotors::GetStop(){
+    return SUnits;
+}
+int TMotors::SetVSetting(int v){
+    VSetting=v;
+    return VSetting;
+}
+int TMotors::GetVSetting(){
+    return VSetting;
 }
