@@ -27,13 +27,15 @@ class TMotors{
         //SST
             double TargetSetting=0;
             double Target=TargetSetting;
+
         //calib
             bool Calibrated=false;
 
         // int VDefault=100;// velocity default setting ->spinto
     public:
-               SendControl SendControl=SendControl::SMS;
-               double TargetSum=0;
+                SendControl SendControl=SendControl::SMS;
+                double TargetSum=0;
+
  
         //spin to; needs nested class
 
@@ -54,6 +56,7 @@ class TMotors{
         int GetVSetting();
         void SetTargetSetting(double tar);
         double GetTargetSetting();
+        void SetTarget(double tar);
         double GetTarget();
         void SetMinPos(int pos);
         void SetMaxPos(int pos);

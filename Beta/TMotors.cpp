@@ -26,7 +26,7 @@ void TMotors::SST(double tar,int v){
 
     TargetSum+=tar;
     for(int i=0; i < NumberOfMotors; ++i){
-            Motors[i].startRotateTo(tar,RUnits,v,VUnits);
+            Motors[i].startRotateTo(Target,RUnits,VSet,VUnits);
         }
 }
 bool TMotors::Spinning(){
@@ -85,6 +85,9 @@ void TMotors::SetTargetSetting(double tar){
 }
 double TMotors::GetTargetSetting(){
     return TargetSetting;
+}
+void TMotors::SetTarget(double tar){
+    Target=tar;
 }
 double TMotors::GetTarget(){
     return Target;
