@@ -1,19 +1,20 @@
-TControllers::TControllers(TMotors &motor){
+TControllers::TControllers(TMotors &motor,bool spinto){
     Motor=&motor;
+    SpinToControlEnabled=true;
 }
 void TControllers::RampingInit(Ramping &ramp){
-    Ramp=&ramp;
-    Motor->SendControl=SendControl::Ramping;
+    // Ramp=&ramp;
+    // Motor->SendControl=SendControl::Ramping;
 }
 void TControllers::OutPut(int v){
-    switch(Motor->SendControl){
-        case SendControl::SMS :
-            Motor->SMS(v);
-            break;
-        case SendControl::Ramping :
-            Ramp->Request(v);
-            break;
-    }
+    // switch(Motor->SendControl){
+    //     case SendControl::SMS :
+    //         Motor->SMS(v);
+    //         break;
+    //     case SendControl::Ramping :
+    //         Ramp->Request(v);
+    //         break;
+    // }
 }
 void TControllers::SpinTo(int tar,bool sms=true,bool stop=true,bool rel=false,int v=100,int tal=0){
     if(rel) tar+=LastTar;
