@@ -8,13 +8,13 @@ void TMotors::Stop(){
     }
 }
 void TMotors::SMS(int v,bool limit){
-    VSet=v;
+    VSet=v*Ratio;
     if(v==0)    Stop();
     else if(MinPosEnabled && v<0 && Rotation()<MinPos) Stop();//requested left/down and over min left/donw pos
     else if(MaxPosEnabled && v>0 && Rotation()>MaxPos) Stop();//requested right/up and over max right/up pos
     else{
         for(int i=0; i < NumberOfMotors; ++i){
-            Motors[i].spin(vex::directionType::fwd,v,VUnits);
+            Motors[i].spin(vex::directionType::fwd,VSet,VUnits);
         }
     }
 }
@@ -40,6 +40,17 @@ bool TMotors::Spinning(){
 
     if(std::abs(Sum)>VMinChange)    return true;
     else                            return false;
+}
+bool TMotors::SSTTH(){//StartSpinToTargetHit
+    bool SSTTH=false;
+    if(NumberOfMotors!=1){
+        for(int i=0; i < NumberOfMotors && !SSTTH; ++i){
+            SSTTH=Motors[i].isSpinning();//is spining to target
+        }
+    }
+    else SSTTH=Motors[0].isSpinning();
+
+    return SSTTH;
 }
 double TMotors::Rotation(){
     if(NumberOfMotors!=1){
@@ -82,6 +93,9 @@ int TMotors::GetVSetting(){
 }
 void TMotors::SetTargetSetting(double tar){
     TargetSetting=tar;
+}
+void TMotors::AddTargetSetting(double tar){
+    TargetSetting+=tar;
 }
 double TMotors::GetTargetSetting(){
     return TargetSetting;
@@ -131,4 +145,13 @@ void TMotors::Calibrate(int rpm,float minv,int timeout,int updatemsec,int acelms
 }
 bool TMotors::GetCalibrated(){
     return Calibrated;
+}
+void TMotors::SetVRatio(double r){
+    Ratio=r;
+}
+double TMotors::GetVRatio(){
+    return Ratio;
+}
+double TMotors::GetTargetSettingDelta(){
+    return TargetSetting-Rotation();
 }
