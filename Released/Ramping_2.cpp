@@ -2,18 +2,18 @@
 #define Ramping_2_cpp
 class Ramping{
     protected:
-        int ChangeVal=1;    //the amout of Val change per loop
+        double ChangeVal=1;    //the amout of Val change per loop
 
-        int ValRequested=0; //used to request value
-        int ValOutput=0;    //val output
-        int MaxVal=100;     //the max val output
-        int MinVal=0;       //the min val output
+        double ValRequested=0; //used to request value
+        double ValOutput=0;    //val output
+        double MaxVal=100;     //the max val output
+        double MinVal=0;       //the min val output
     public:
         //need to move to protected
             bool Enabled=false;
             int ChangeMsec=1;   //the amount of time inbetween loops
 
-        Ramping(int CV,int CM,int maxV=100,int minV=0){
+        Ramping(double CV,double CM,double maxV=100,double minV=0){
             ChangeVal=CV;
             ChangeMsec=CM;
             MaxVal=maxV;
@@ -40,7 +40,7 @@ class Ramping{
             Request(val);
             ValOutput=val;
         }
-        int Output(){
+        double Output(){
             return ValOutput;
         }
 };
