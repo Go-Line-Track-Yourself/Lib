@@ -11,6 +11,8 @@ class PID{
         double I=0;
         double D=0;
 
+        double Output=0;
+        
         double LastError=0;
         int Time=0;
 
@@ -24,7 +26,8 @@ class PID{
         int MidValue=0;
     public:
         PID(double kp,double ki,double kd,int time);
-        double Output(double tar,double cur);
+        double Calculate(double tar,double cur);
+        double GetOutput();
         void SetMinValue(int minv);
         void SetMaxValue(int maxv);
         void SetLimits(int minv,int maxv);

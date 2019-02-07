@@ -4,17 +4,25 @@ PID::PID(double kp,double ki,double kd,int time){
     Kd=kd;
     Time=time;
 }
-double PID::Output(double tar,double cur){
-    double output=0;
+double PID::Calculate(double tar,double cur){
+    double Calc=0;
     P=Kp*(tar-cur);
     I=Ki*(I+(tar-cur))/Time;
     D=Kd*((tar-cur)-LastError)/Time;
-    output=P+I+D;
-    if(HasMaxValue && output>MaxValue)  output=MaxValue;
-    if(HasMinValue && output<MinValue)  output=MinValue;
-    if(HasMidValue && output>MidValue && output<MidMax) output=MidValue;
-    if(HasMidValue && output<MidValue && output>MidMin) output=MidValue;
-    return output;
+    Calc=P+I+D;
+
+    if(HasMaxValue && Calc>MaxValue)  Calc=MaxValue;
+    if(HasMinValue && Calc<MinValue)  Calc=MinValue;
+    if(HasMidValue && Calc>MidValue && Calc<MidMax) Calc=MidValue;
+    if(HasMidValue && Calc<MidValue && Calc>MidMin) Calc=MidValue;
+    
+    LastError=tar-cur;
+
+    Output=Calc;
+    return Output;
+}
+double PID::GetOutput(){
+    return Output;
 }
 void PID::SetMinValue(int minv){
     HasMinValue=true;
