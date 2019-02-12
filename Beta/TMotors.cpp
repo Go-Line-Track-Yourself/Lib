@@ -31,41 +31,31 @@ void TMotors::SST(double tar,int v){
 }
 bool TMotors::Spinning(){
     double Sum=0;
-    if(NumberOfMotors!=1){
-        for(int i=0; i < NumberOfMotors; ++i){
-            Sum+=Motors[i].velocity(VUnits);
-        }
+    for(int i=0; i < NumberOfMotors; ++i){
+        Sum+=Motors[i].velocity(VUnits);
     }
-    else Sum=Motors[0].velocity(VUnits);
-
-    if(std::abs(Sum)>VMinChange)    return true;
-    else                            return false;
+    if(std::abs(Motors[0].velocity(VUnits))>VMinChange) return true;
+    else                                                return false;
 }
 bool TMotors::SSTTH(){//StartSpinToTargetHit
     bool SSTTH=false;
-    if(NumberOfMotors!=1){
-        for(int i=0; i < NumberOfMotors && !SSTTH; ++i){
-            SSTTH=Motors[i].isSpinning();//is spining to target
-        }
+    for(int i=0; i < NumberOfMotors && !SSTTH; ++i){
+        SSTTH=Motors[i].isSpinning();//is spining to target
     }
-    else SSTTH=Motors[0].isSpinning();
 
     return SSTTH;
 }
 double TMotors::Rotation(){
-    if(NumberOfMotors!=1){
-        double Sum=0;
-        for(int i=0; i < NumberOfMotors; ++i){
-            Sum+=Motors[i].rotation(RUnits);
-        }
-        return Sum/NumberOfMotors;
+    double Sum=0;
+    for(int i=0; i < NumberOfMotors; ++i){
+        Sum+=Motors[i].rotation(RUnits);
     }
-    else return Motors[0].rotation(RUnits);
+    return Sum/NumberOfMotors;
 }
 void TMotors::ResetRotation(){
     for(int i=0; i < NumberOfMotors; ++i){
-            Motors[i].resetRotation();
-        }
+            Motors[0].resetRotation();
+    }
 }
 void TMotors::SetStop(vex::brakeType sunits){
     SUnits=sunits;
