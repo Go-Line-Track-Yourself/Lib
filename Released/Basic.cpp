@@ -10,4 +10,15 @@ int SGN(double Var){
     else            Var=0;
     return Var;
 }
+void EndTimeSlice(int EndWait=5){//add posible callback during waiting with while loop via background task
+    vex::task::sleep(EndWait);
+}
+void limit(int& Val,int minVal=-100,int maxVal=100){//add option to not ref var
+    if(Val<minVal) Val=minVal;
+    if(Val>maxVal) Val=maxVal;
+}
+double MAX(double v1, double v2){
+    if(v1>v2)   return v1;
+    else        return v2;
+}
 #endif
