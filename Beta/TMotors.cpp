@@ -119,6 +119,12 @@ TMotors::TMotors(vex::motor motor[], int num){
         double TMotors::GetTarget(){
             return Target;
         }
+        void TMotors::SetTolerance(double tal){
+            Tolerance=tal;
+        }
+        double TMotors::GetTolerance(){
+            return Tolerance;
+        }
     //PosLimit
         void TMotors::SetMinPos(int pos){
             MinPosEnabled=true;
@@ -171,3 +177,26 @@ TMotors::TMotors(vex::motor motor[], int num){
     bool TMotors::GetCalibrated(){
         return Calibrated;
     }
+            //Wait
+                // wait for the motor to get to target
+                void TMotors::SSTWait(int endwait){
+                    while(SSTTH()){//wait for lift to stop moving
+                        EndTimeSlice(5);
+                    }
+                    EndTimeSlice(5);
+                }
+                void TMotors::Wait(double target,double tal,int endwait){
+                    while(std::abs(target-Rotation())>tal){
+                        EndTimeSlice(5);
+                    }
+                    EndTimeSlice(endwait);
+                }
+                void TMotors::Wait(double target,double tal){
+                    Wait(target,tal,0);
+                }
+                void TMotors::Wait(int endwait){
+                    while(std::abs(TargetSetting-Rotation())>Tolerance){
+                        EndTimeSlice(5);
+                    }
+                    EndTimeSlice(endwait);
+                }

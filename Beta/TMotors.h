@@ -29,6 +29,7 @@ class TMotors{
             double TargetSetting=0;//Rel;what the target is set to
             double Target=TargetSetting;//abs;not used need to implement in controller
             double TargetSum=0;//why
+            double Tolerance=1;
         //calib
             bool Calibrated=false;
         //SMS
@@ -75,6 +76,8 @@ class TMotors{
                 double GetTargetSetting();
                 // void SetTarget(double tar);
                 double GetTarget();
+                void SetTolerance(double tal);
+                double GetTolerance();
             //PosLimit
                 void SetMinPos(int pos);
                 void SetMaxPos(int pos);
@@ -86,6 +89,12 @@ class TMotors{
             double GetTargetSettingDelta();
             void Calibrate(int rpm=200,float minv=1/4,int timeout=1000,int updatemsec=10,int acelmsec=100);
             bool GetCalibrated();//isCalibrated
+            //Wait
+                // wait for the motor to get to target
+                void SSTWait(int endwait);
+                void Wait(double target,double tal,int endwait);
+                void Wait(double target,double tal);
+                void Wait(int endwait);
 };
 #include "TMotors.cpp"
 #endif
